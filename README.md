@@ -8,4 +8,5 @@ This is a course on modern web development by the University of Helsinki. This c
 
 ### Completed parts
 
-- [x] Part 0: Fundamentals of Web apps
+- [x] Part 0: Fundamentals of Web apps: 6/6
+- [x] Part 1: Introduction to React: 14/14
