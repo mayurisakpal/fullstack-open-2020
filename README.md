@@ -10,3 +10,4 @@ This is a course on modern web development by the University of Helsinki. This c
 
 - [x] Part 0: Fundamentals of Web apps: 6/6
 - [x] Part 1: Introduction to React: 14/14
+- [x] Part 2: Communicating with server: 20/20
