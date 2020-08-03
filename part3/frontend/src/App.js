@@ -41,13 +41,17 @@ const App = () => {
       .createData(newData)
       .then((data) => {
         setPersons(persons.concat(data));
-      })
-      .then(
         setNotification({
           message: `Added ${newData.name}.`,
-        })
-      )
-      .catch((error) => console.warn(error));
+        });
+      })
+      .catch((error) => {
+        console.warn(error.response.data.error);
+        setNotification({
+          message: error.response.data.error,
+          type: "unsuccessful",
+        });
+      });
   };
 
   // replace the old number i.e update existing data in server

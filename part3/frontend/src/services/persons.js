@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "https://fullstack-open-2020-part3.herokuapp.com/api/persons";
+const baseUrl = "/api/persons";
 
 const getAll = () => {
   return axios.get(baseUrl).then((response) => response.data);
