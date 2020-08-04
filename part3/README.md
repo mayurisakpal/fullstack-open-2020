@@ -1,8 +1,8 @@
-# This repository contains the frontend and link to the backend of part3.
+# This repository contains the frontend and link to the backend of part3 [Programming a server with NodeJS and Express](https://fullstackopen.com/en/part3)
 
 ## Heroku app URL: https://fullstack-open-2020-part3.herokuapp.com/
 
-## Bacend repository: https://github.com/mayurisakpal/fullstack-open-2020-part3
+## Part 3 Backend repository: https://github.com/mayurisakpal/fullstack-open-2020-part3
 
 ## Part 3: exercises 3.1 - 3.22
 
