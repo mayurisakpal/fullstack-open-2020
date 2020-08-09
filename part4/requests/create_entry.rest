@@ -1,0 +1,9 @@
+POST http://localhost:3001/api/blogs
+content-type: application/json
+
+{
+  "title": "The Alchemist",
+  "author": "Paulo Coelho",
+  "url": "https://i.picsum.photos/id/787/200/200.jpg?hmac=CBLWRcHYFRDgc9zVqCgHmh5o2J6ADdShlYwX6ZKfqA4",
+  "likes": 100
+}
