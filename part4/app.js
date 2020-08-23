@@ -22,7 +22,7 @@ mongoose
     logger.info('connected to MongoDB');
   })
   .catch((error) => {
-    logger.errror('error connecting to MongoDB:', error.message);
+    logger.error('error connecting to MongoDB:', error.message);
   });
 
 app.use(middleware.requestLogger);

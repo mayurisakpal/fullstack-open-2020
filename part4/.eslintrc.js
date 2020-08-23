@@ -4,6 +4,7 @@ module.exports = {
     browser: true,
     commonjs: true,
     es2020: true,
+    jest: true,
   },
   extends: 'eslint:recommended',
   parserOptions: {
@@ -11,7 +12,7 @@ module.exports = {
   },
   rules: {
     indent: ['error', 2],
-    'linebreak-style': ['error', 'unix'],
+    'linebreak-style': ['error', 'windows'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
     eqeqeq: 'error',
@@ -19,6 +20,6 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'arrow-spacing': ['error', { before: true, after: true }],
     'no-console': 0,
-    'no-multiple-empty-lines': ['error', { 'max': 1, 'maxEOF': 0 }]
+    'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 0 }],
   },
 };
