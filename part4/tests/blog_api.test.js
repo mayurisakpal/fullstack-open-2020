@@ -144,6 +144,49 @@ describe('Requried properties missing', function () {
   });
 });
 
+describe('DELETE /blogs', function () {
+  test('should delete a blog witch has given id and return 204', async () => {
+    await api.delete('/api/blogs/5fa40c1882a55603f0b5330c').expect(204);
+  });
+
+  test('should return error if given id is missing', async () => {
+    await api.delete('/api/blogs/5fa40c1882a').expect(400);
+  });
+});
+
+describe('PUT /blogs', function () {
+  test('should update the content of blog which has given id', async () => {
+    const blogs = await api.get('/api/blogs');
+    const id = blogs.body[0].id;
+
+    const updatedEntry = {
+      likes: 50,
+      title: 'The Alchemist',
+      author: 'Paulo Coelho',
+      url:
+        'https://i.picsum.photos/id/787/200/200.jpg?hmac=CBLWRcHYFRDgc9zVqCgHmh5o2J6ADdShlYwX6ZKfqA4',
+    };
+    const updatedBlog = await api
+      .put(`/api/blogs/${id}`)
+      .send(updatedEntry)
+      .set('Accept', 'application/json')
+      .expect(200);
+
+    expect(updatedBlog.body).toHaveProperty('likes', 50);
+  });
+
+  test('should throw an error if id is not valid', async () => {
+    const updatedEntry = {
+      likes: 1,
+      title: 'The Alchemist',
+      author: 'Paulo Coelho',
+      url:
+        'https://i.picsum.photos/id/787/200/200.jpg?hmac=CBLWRcHYFRDgc9zVqCgHmh5o2J6ADdShlYwX6ZKfqA4',
+    };
+    await api.put('/api/blogs/5fa40c1282a55b').send(updatedEntry).expect(400);
+  });
+});
+
 afterAll(() => {
   mongoose.connection.close();
 });

@@ -1,0 +1,9 @@
+PUT http://localhost:3001/api/blogs/5fa40c1282a55603f0b5330b
+content-type: application/json
+
+{
+    "likes": 98,
+    "title": "The Alchemist test",
+    "author": "Paulo Coelho",
+    "url": "https://i.picsum.photos/id/787/200/200.jpg?hmac=CBLWRcHYFRDgc9zVqCgHmh5o2J6ADdShlYwX6ZKfqA4"
+}
