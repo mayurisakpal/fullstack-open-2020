@@ -116,6 +116,34 @@ describe('Like property of blogs', function () {
   });
 });
 
+describe('Requried properties missing', function () {
+  test('should return status code 400 Bad Request when title property is missing', async () => {
+    const newBlogPost = {
+      author: 'Edsger W. Dijkstra',
+      url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html',
+    };
+
+    await api
+      .post('/api/blogs')
+      .send(newBlogPost)
+      .set('Accept', 'application/json')
+      .expect(400);
+  });
+
+  test('should return status code 400 Bad Request when url property is missing', async () => {
+    const newBlogPost = {
+      title: 'New blog Canonical string reduction',
+      author: 'Edsger W. Dijkstra',
+    };
+
+    await api
+      .post('/api/blogs')
+      .send(newBlogPost)
+      .set('Accept', 'application/json')
+      .expect(400);
+  });
+});
+
 afterAll(() => {
   mongoose.connection.close();
 });

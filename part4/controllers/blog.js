@@ -9,18 +9,22 @@ blogRouter.get('/', async (request, response) => {
 blogRouter.post('/', async (request, response, next) => {
   const body = request.body;
 
-  const blog = new Blog({
-    title: body.title,
-    author: body.author,
-    url: body.url,
-    likes: body.likes,
-  });
+  if (!body.title || !body.url) {
+    response.status(400).end();
+  } else {
+    const blog = new Blog({
+      title: body.title,
+      author: body.author,
+      url: body.url,
+      likes: body.likes,
+    });
 
-  try {
-    const savedBlogs = await blog.save();
-    response.status(201).json(savedBlogs.toJSON());
-  } catch (err) {
-    next(err);
+    try {
+      const savedBlogs = await blog.save();
+      response.status(201).json(savedBlogs.toJSON());
+    } catch (err) {
+      next(err);
+    }
   }
 });
 
