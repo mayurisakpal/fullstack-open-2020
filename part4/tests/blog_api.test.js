@@ -81,6 +81,41 @@ describe('POST /blogs', function () {
   });
 });
 
+describe('Like property of blogs', function () {
+  test('should default to 0 if likes are missing', async () => {
+    const newBlogPost = {
+      title: 'New blog Canonical string reduction',
+      author: 'Edsger W. Dijkstra',
+      url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html',
+    };
+
+    const blogsList = await api
+      .post('/api/blogs')
+      .send(newBlogPost)
+      .set('Accept', 'application/json')
+      .expect(201);
+
+    expect(blogsList.body).toHaveProperty('likes', 0);
+  });
+
+  test('should return given like', async () => {
+    const newBlogPost = {
+      title: 'New blog Canonical string reduction',
+      author: 'Edsger W. Dijkstra',
+      url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html',
+      likes: 16,
+    };
+
+    const blogsList = await api
+      .post('/api/blogs')
+      .send(newBlogPost)
+      .set('Accept', 'application/json')
+      .expect(201);
+
+    expect(blogsList.body).toHaveProperty('likes', 16);
+  });
+});
+
 afterAll(() => {
   mongoose.connection.close();
 });
