@@ -52,6 +52,11 @@ describe('GET /blogs', function () {
     const blogs = await api.get('/api/blogs');
     expect(blogs.body.length).toBe(3);
   });
+
+  test('blogs have an unique identifier id property', async () => {
+    const blogs = await api.get('/api/blogs');
+    expect(blogs.body[0].id).toBeDefined();
+  });
 });
 
 afterAll(() => {
