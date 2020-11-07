@@ -28,6 +28,7 @@ mongoose
   });
 
 app.use(middleware.requestLogger);
+app.use(middleware.tokenExtractor);
 
 app.use('/api/blogs', blogRouter);
 app.use('/api/users', userRouter);

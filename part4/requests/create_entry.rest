@@ -1,6 +1,6 @@
 POST http://localhost:3001/api/blogs
 content-type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Indvcmxkc0Jlc3RCb3NzIiwiaWQiOiI1ZmE2ODc4Y2Y2ZTQyMzBmYTQ4Y2I5NmIiLCJpYXQiOjE2MDQ3NTk0MjF9.QcF9JXZQg-QY-5iDnxrSV83G6sIFhB4anXOgJ-Bws1Q
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Indvcmxkc0Jlc3RCb3NzIiwiaWQiOiI1ZmE2ODc4Y2Y2ZTQyMzBmYTQ4Y2I5NmIiLCJpYXQiOjE2MDQ3NjcyMjh9.DVcewFfijYm-lUZ4cjOXVl4DmSEDqhw0cv63-EgSvYk
 
 {
   "title": "The Alchemist",
