@@ -5,5 +5,6 @@ content-type: application/json
   "title": "The Alchemist",
   "author": "Paulo Coelho",
   "url": "https://i.picsum.photos/id/787/200/200.jpg?hmac=CBLWRcHYFRDgc9zVqCgHmh5o2J6ADdShlYwX6ZKfqA4",
-  "likes": 100
+  "likes": 100,
+  "userId": "5fa6878cf6e4230fa48cb96b"
 }
