@@ -6,6 +6,5 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Indvc
   "title": "The Alchemist",
   "author": "Paulo Coelho",
   "url": "https://i.picsum.photos/id/787/200/200.jpg?hmac=CBLWRcHYFRDgc9zVqCgHmh5o2J6ADdShlYwX6ZKfqA4",
-  "likes": 100,
-  "userId": "5fa6878cf6e4230fa48cb96b"
+  "likes": 100
 }

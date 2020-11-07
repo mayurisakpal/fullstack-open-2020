@@ -14,8 +14,9 @@ blogRouter.post('/', async (request, response, next) => {
 
   try {
     const decodedToken = jwt.verify(token, config.JWT_SECRET);
+
     if (!token || !decodedToken.id) {
-      return response.status(401).json({ error: 'token missing or invalid' });
+      return response.status(401).json({ error: 'invalid token' });
     }
     if (!body.title || !body.url) {
       response.status(400).end();
@@ -45,7 +46,7 @@ blogRouter.delete('/:id', async (request, response, next) => {
   try {
     const decodedToken = jwt.verify(token, config.JWT_SECRET);
     if (!token || !decodedToken.id) {
-      return response.status(401).json({ error: 'token missing or invalid' });
+      return response.status(401).json({ error: 'invalid token' });
     }
     const blog = await Blog.findById(id);
 
@@ -67,24 +68,37 @@ blogRouter.delete('/:id', async (request, response, next) => {
 });
 
 blogRouter.put('/:id', async (request, response, next) => {
-  const id = request.params.id;
+  const { token, params, body } = request;
+  const { id } = params || {};
 
   const entry = {
-    title: request.body.title,
-    author: request.body.author,
-    url: request.body.url,
-    likes: request.body.likes,
+    title: body.title,
+    author: body.author,
+    url: body.url,
+    likes: body.likes,
   };
 
   try {
-    const updatedEntry = await Blog.findByIdAndUpdate(id, entry, {
-      new: true,
-    });
+    const decodedToken = jwt.verify(token, config.JWT_SECRET);
+    if (!token || !decodedToken.id) {
+      return response.status(401).json({ error: 'invalid token' });
+    }
 
-    if (updatedEntry) {
+    const blog = await Blog.findById(id);
+
+    if (!blog) {
+      return response.status(404).json({ error: 'blog not found' }).end();
+    }
+
+    const isAuthUser = blog.user.toString() === decodedToken.id;
+
+    if (isAuthUser) {
+      const updatedEntry = await Blog.findByIdAndUpdate(id, entry, {
+        new: true,
+      });
       response.json(updatedEntry.toJSON());
     } else {
-      response.status(404).end();
+      return response.status(403).json({ error: 'not authorized' }).end();
     }
   } catch (err) {
     next(err);

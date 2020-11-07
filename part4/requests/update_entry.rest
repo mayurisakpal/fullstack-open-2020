@@ -1,9 +1,7 @@
-PUT http://localhost:3001/api/blogs/5fa40c1282a55603f0b5330b
+PUT http://localhost:3001/api/blogs/5fa6cf2829ec0e2fec515d68
 content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Indvcmxkc0Jlc3RCb3NzIiwiaWQiOiI1ZmE2ODc4Y2Y2ZTQyMzBmYTQ4Y2I5NmIiLCJpYXQiOjE2MDQ3NjcyMjh9.DVcewFfijYm-lUZ4cjOXVl4DmSEDqhw0cv63-EgSvYk
 
 {
-    "likes": 98,
-    "title": "The Alchemist test",
-    "author": "Paulo Coelho",
-    "url": "https://i.picsum.photos/id/787/200/200.jpg?hmac=CBLWRcHYFRDgc9zVqCgHmh5o2J6ADdShlYwX6ZKfqA4"
+    "likes": 95
 }
