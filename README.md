@@ -12,3 +12,4 @@ This is a course on modern web development by the University of Helsinki. This c
 - [x] Part 1: Introduction to React: 14/14
 - [x] Part 2: Communicating with server: 20/20
 - [x] Part 3: Programming a server with NodeJS and Express 22/22
+- [x] Part 4: Testing Express servers, user administration 22/22
