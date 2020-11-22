@@ -1,6 +1,12 @@
 import React from 'react';
 
-const Login = ({ onFormSubmit, usernameOnchange, passwordOnchange }) => {
+const LoginForm = ({
+  onFormSubmit,
+  usernameOnchange,
+  passwordOnchange,
+  username,
+  password,
+}) => {
   return (
     <>
       <h2>Login to the account!</h2>
@@ -13,6 +19,7 @@ const Login = ({ onFormSubmit, usernameOnchange, passwordOnchange }) => {
             id='username'
             onChange={usernameOnchange}
             className='input-field'
+            value={username}
           />
         </div>
         <div className='form-control'>
@@ -23,6 +30,7 @@ const Login = ({ onFormSubmit, usernameOnchange, passwordOnchange }) => {
             id='password'
             onChange={passwordOnchange}
             className='input-field'
+            password={password}
           />
         </div>
         <button className='btn'>Login</button>
@@ -31,4 +39,4 @@ const Login = ({ onFormSubmit, usernameOnchange, passwordOnchange }) => {
   );
 };
 
-export default Login;
+export default LoginForm;

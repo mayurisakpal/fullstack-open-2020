@@ -1,9 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Blog from './components/Blog';
-import Login from './components/Login';
+import LoginForm from './components/LoginForm';
 import Notification from './components/Notification';
-import { getAll, setToken, createBlog } from './services/blogs';
+import {
+  getAll,
+  setToken,
+  createBlog,
+  updateBlog,
+  deleteBlog,
+} from './services/blogs';
 import AddBlogForm from './components/AddBlogForm';
+import Togglable from './components/Togglable';
 import { login } from './services/login';
 import './styles/app.css';
 
@@ -16,6 +23,7 @@ const App = () => {
   const [newBlogAuthor, setNewBlogAuthor] = useState('');
   const [newBlogUrl, setNewBlogUrl] = useState('');
   const [notification, setNotification] = useState({});
+  const blogFormRef = useRef();
 
   const getAllBlogs = async () => {
     try {
@@ -138,11 +146,15 @@ const App = () => {
       };
       try {
         const response = await createBlog(newObj);
-        console.log({ response });
         if (response) {
           setNotification({
             message: `A new blog ${newBlogTitle}, by ${newBlogAuthor} added`,
           });
+          if (blogFormRef.current) {
+            blogFormRef.current.toggleVisibility();
+          }
+          const blogs = await getAll();
+          setBlogs(blogs);
         }
         resetBlogForm();
       } catch (error) {
@@ -156,45 +168,116 @@ const App = () => {
     }
   };
 
+  const handleBlogLikeClick = async (id) => {
+    const blogToUpdate = blogs.find((item) => item.id === id);
+    if (blogToUpdate) {
+      try {
+        const likes = blogToUpdate.likes ? blogToUpdate.likes + 1 : 1;
+        const updatedBlog = {
+          ...blogToUpdate,
+          likes,
+        };
+        const response = await updateBlog(id, updatedBlog);
+        if (response) {
+          const updatedBlogList = blogs.map((item) =>
+            item.id === id ? updatedBlog : item
+          );
+          setBlogs(updatedBlogList);
+        }
+      } catch (error) {
+        const { data, statusText } = error.response;
+        setNotification({
+          message: data.error || statusText,
+          type: 'unsuccessful',
+        });
+        console.warn(error);
+      }
+    }
+  };
+
+  const handleBlogRemoveClick = async (id, title, author) => {
+    const message = `Remove blog ${title} by ${author}`;
+    if (window.confirm(message)) {
+      try {
+        await deleteBlog(id);
+        const updatedBlogList = blogs.filter((item) => item.id !== id);
+        setBlogs(updatedBlogList);
+      } catch (error) {
+        const { data, statusText } = error.response;
+        setNotification({
+          message: data.error || statusText,
+          type: 'unsuccessful',
+        });
+        console.warn(error);
+      }
+    }
+  };
+
+  const renderAddBlogForm = () => (
+    <Togglable buttonLabel='Create new Blog' ref={blogFormRef}>
+      <AddBlogForm
+        titleOnchange={handleTitleOnchange}
+        authorOnchange={handleAuthorOnchange}
+        urlOnchange={handleUrlOnchange}
+        onFormSubmit={handleAddBlogFormSubmit}
+        blogTitle={newBlogTitle}
+        blogAuthor={newBlogAuthor}
+        blogUrl={newBlogUrl}
+      />
+    </Togglable>
+  );
+
+  const renderLoginForm = () => (
+    <Togglable buttonLabel='Login'>
+      <LoginForm
+        onFormSubmit={handleLoginFormSubmit}
+        passwordOnchange={handlePasswordOnchange}
+        usernameOnchange={handleUsernameOnchange}
+        username={username}
+        password={password}
+      />
+    </Togglable>
+  );
+
   const renderBlogsWrapper = () => {
     return (
-      <div>
-        <h2 className='main-title'>Blogs</h2>
+      <>
         <div className='user-introduction'>
           <h3>{user.name} logged in!</h3>&nbsp;
           <button onClick={handleLogout} className='btn'>
             Logout
           </button>
         </div>
-        <AddBlogForm
-          titleOnchange={handleTitleOnchange}
-          authorOnchange={handleAuthorOnchange}
-          urlOnchange={handleUrlOnchange}
-          onFormSubmit={handleAddBlogFormSubmit}
-        />
-        <div className='blog-list-wrapper'>
-          {blogs.map((blog) => (
-            <Blog key={blog.id} blog={blog} />
-          ))}
-        </div>
-      </div>
+        {renderAddBlogForm()}
+        {renderBlogList()}
+      </>
     );
   };
+
+  const renderBlogList = () =>
+    blogs.length && (
+      <div className='blog-list-wrapper'>
+        {blogs
+          .sort((first, second) => second.likes - first.likes)
+          .map((blog) => (
+            <Blog
+              key={blog.id}
+              blog={blog}
+              onLikeClick={handleBlogLikeClick}
+              onRemoveClick={handleBlogRemoveClick}
+              authUser={user}
+            />
+          ))}
+      </div>
+    );
 
   return (
     <>
       {notification.message && (
         <Notification message={notification.message} type={notification.type} />
       )}
-      {user && user.token ? (
-        renderBlogsWrapper()
-      ) : (
-        <Login
-          onFormSubmit={handleLoginFormSubmit}
-          passwordOnchange={handlePasswordOnchange}
-          usernameOnchange={handleUsernameOnchange}
-        />
-      )}
+      <h2 className='main-title'>Blogs</h2>
+      {user && user.token ? renderBlogsWrapper() : renderLoginForm()}
     </>
   );
 };

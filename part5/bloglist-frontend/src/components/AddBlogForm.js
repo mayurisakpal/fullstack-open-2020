@@ -5,6 +5,9 @@ const AddBlogForm = ({
   authorOnchange,
   urlOnchange,
   onFormSubmit,
+  blogTitle,
+  blogAuthor,
+  blogUrl,
 }) => (
   <form onSubmit={onFormSubmit}>
     <div className='form-control'>
@@ -15,6 +18,7 @@ const AddBlogForm = ({
         id='title'
         onChange={titleOnchange}
         className='input-field'
+        value={blogTitle}
       />
     </div>
     <div className='form-control'>
@@ -25,6 +29,7 @@ const AddBlogForm = ({
         id='author'
         onChange={authorOnchange}
         className='input-field'
+        value={blogAuthor}
       />
     </div>
     <div className='form-control'>
@@ -35,6 +40,7 @@ const AddBlogForm = ({
         id='url'
         onChange={urlOnchange}
         className='input-field'
+        value={blogUrl}
       />
     </div>
     <button className='btn'>Create</button>
