@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
 const Blog = ({ blog, onLikeClick, onRemoveClick, authUser }) => {
   const [isVisible, setVisible] = useState(false);
 
@@ -46,4 +48,18 @@ const Blog = ({ blog, onLikeClick, onRemoveClick, authUser }) => {
   );
 };
 
+Blog.propTypes = {
+  blog: PropTypes.shape({
+    title: PropTypes.string,
+    author: PropTypes.string,
+    id: PropTypes.string.isRequired,
+    url: PropTypes.string,
+    likes: PropTypes.number,
+  }).isRequired,
+  onLikeClick: PropTypes.func.isRequired,
+  onRemoveClick: PropTypes.func.isRequired,
+  authUser: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+  }).isRequired,
+};
 export default Blog;
