@@ -44,7 +44,9 @@ const AddBlogForm = ({
         value={blogUrl}
       />
     </div>
-    <button className='btn'>Create</button>
+    <button data-test-id='create' className='btn'>
+      Create
+    </button>
   </form>
 );
 

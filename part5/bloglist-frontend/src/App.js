@@ -244,7 +244,7 @@ const App = () => {
       <>
         <div className='user-introduction'>
           <h3>{user.name} logged in!</h3>&nbsp;
-          <button onClick={handleLogout} className='btn'>
+          <button onClick={handleLogout} className='btn' data-test-id='logout'>
             Logout
           </button>
         </div>
@@ -255,8 +255,8 @@ const App = () => {
   };
 
   const renderBlogList = () =>
-    blogs.length && (
-      <div className='blog-list-wrapper'>
+    blogs.length > 0 && (
+      <div className='blog-list-wrapper' data-test-id='blogListWrapper'>
         {blogs
           .sort((first, second) => second.likes - first.likes)
           .map((blog) => (

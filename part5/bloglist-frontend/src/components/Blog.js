@@ -11,18 +11,23 @@ const Blog = ({ blog, onLikeClick, onRemoveClick, authUser }) => {
   return (
     <div className='mt-12 blog-list-item'>
       {blog.title}, by {blog.author}
-      <button onClick={handleToggle} className='btn ml-8'>
+      <button
+        onClick={handleToggle}
+        className='btn ml-8'
+        data-test-id='toggleBlog'
+      >
         {isVisible ? 'Hide' : 'View'}
       </button>
       {isVisible && (
         <>
-          <ul>
+          <ul data-test-id='blogDetailsList'>
             <li>{blog.url}</li>
             <li>
-              Likes {blog.likes}
+              Likes <span data-test-id='blogLikes'>{blog.likes}</span>
               <button
                 onClick={onLikeClick.bind(null, blog.id)}
                 className='btn ml-8'
+                data-test-id='likeBlog'
               >
                 Like
               </button>
@@ -37,6 +42,7 @@ const Blog = ({ blog, onLikeClick, onRemoveClick, authUser }) => {
                 blog.title,
                 blog.author
               )}
+              data-test-id='removeBlog'
               className='btn mt-12 blog-item-remove-btn'
             >
               Remove

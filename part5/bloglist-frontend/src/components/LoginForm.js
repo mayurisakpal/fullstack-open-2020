@@ -34,7 +34,9 @@ const LoginForm = ({
             password={password}
           />
         </div>
-        <button className='btn'>Login</button>
+        <button id='loginButton' className='btn'>
+          Login
+        </button>
       </form>
     </>
   );
