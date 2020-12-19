@@ -1,0 +1,53 @@
+.btn {
+  padding: 8px 18px;
+  border: 1px solid black;
+  color: black;
+  background-color: white;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-control {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.input-field {
+  margin-left: 8px;
+  border-radius: 4px;
+  padding: 8px 18px;
+  border: 1px solid black;
+}
+
+.user-introduction {
+  display: flex;
+  align-items: center;
+}
+
+.blog-list-wrapper {
+  margin-top: 24px;
+}
+
+.main-title {
+  margin: 0;
+}
+
+.mt-12 {
+  margin-top: 12px;
+}
+
+.ml-8 {
+  margin-left: 8px;
+}
+
+.blog-list-item {
+  border: 1px solid black;
+  padding: 8px 4px;
+}
+
+.blog-item-remove-btn {
+  background-color: red;
+  color: white;
+  border: red;
+}
