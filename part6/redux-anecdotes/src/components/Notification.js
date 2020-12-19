@@ -1,14 +1,17 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import '../styles/notification.css';
 
 const Notification = () => {
-  const style = {
-    border: 'solid',
-    padding: 10,
-    borderWidth: 1
-  };
+  const { message, type } = useSelector(state => state.notification);
+
   return (
-    <div style={style}>
-      render here notification...
+    message &&
+    <div
+      className={`${type === 'unsuccessful' ? 'notification--error' : 'notification--success'
+        } notification`}
+    >
+      {message}
     </div>
   );
 };

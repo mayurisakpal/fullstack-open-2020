@@ -1,13 +1,18 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateVote } from '../reducers/anecdoteReducer';
+import { showAndHideNotification } from '../reducers/notificationReducer';
+import store from '../store';
 
 const AnecdoteList = () => {
-  const anecdotes = useSelector(state => state).sort((first, second) => second.votes - first.votes);
+  const { filter, anecdote: anecdoteList } = useSelector(state => state) || {};
+  const anecdotes = anecdoteList.sort((first, second) => second.votes - first.votes).filter(item => item.content && item.content.toLowerCase().includes(filter.filter.toLowerCase()));
   const dispatch = useDispatch();
 
-  const handleVoteClick = (id) => {
+  const handleVoteClick = (id, anecdote) => {
     dispatch(updateVote(id));
+    const message = `You have voted '${anecdote}'`;
+    showAndHideNotification(store.dispatch, { message: message, type: 'successful' });
   };
 
   return (
@@ -18,7 +23,7 @@ const AnecdoteList = () => {
         </div>
         <div className="mt-8">
           Has {anecdote.votes}
-          <button onClick={handleVoteClick.bind(null, anecdote.id)} className='btn ml-8'>Vote</button>
+          <button onClick={handleVoteClick.bind(null, anecdote.id, anecdote.content)} className='btn ml-8'>Vote</button>
         </div>
       </div>
     )

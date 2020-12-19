@@ -1,6 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { addAnecdote } from '../reducers/anecdoteReducer';
+import { showAndHideNotification } from '../reducers/notificationReducer';
+import store from '../store';
 
 const AnecdoteForm = () => {
   const dispatch = useDispatch();
@@ -10,6 +12,8 @@ const AnecdoteForm = () => {
     const anecdote = event.target.anecdote.value;
     if (anecdote) {
       dispatch(addAnecdote(anecdote));
+      const message = `You have added '${anecdote}'`;
+      showAndHideNotification(store.dispatch, { message, type: 'successful' });
     }
     // reset the input
     event.target.anecdote.value = '';
