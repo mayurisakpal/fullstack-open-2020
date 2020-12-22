@@ -9,7 +9,7 @@ const Notification = () => {
     message &&
     <div
       className={`${type === 'unsuccessful' ? 'notification--error' : 'notification--success'
-        } notification`}
+      } notification`}
     >
       {message}
     </div>
