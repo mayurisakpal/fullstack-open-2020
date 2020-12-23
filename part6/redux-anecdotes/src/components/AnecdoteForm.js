@@ -2,21 +2,31 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { addAnecdote } from '../reducers/anecdoteReducer';
 import { showAndHideNotification } from '../reducers/notificationReducer';
+import { createAnecdote } from '../services/anecdotes';
 import store from '../store';
 
 const AnecdoteForm = () => {
   const dispatch = useDispatch();
 
-  const submitAnecdote = (event) => {
+  const submitAnecdote = async (event) => {
     event.preventDefault();
     const anecdote = event.target.anecdote.value;
     if (anecdote) {
-      dispatch(addAnecdote(anecdote));
-      const message = `You have added '${anecdote}'`;
-      showAndHideNotification(store.dispatch, { message, type: 'successful' });
+      try {
+        const data = {
+          content: anecdote,
+          votes: 0
+        }
+        const postAnecdote = await createAnecdote(data)
+        dispatch(addAnecdote(postAnecdote))
+        const message = `You have added '${anecdote}'`;
+        showAndHideNotification(store.dispatch, { message, type: 'successful' });
+        // reset the input
+        event.target.anecdote.value = '';
+      } catch (error) {
+        showAndHideNotification(store.dispatch, { message: 'Something went wrong', type: 'unsuccessful' });
+      }
     }
-    // reset the input
-    event.target.anecdote.value = '';
   };
 
   return (
