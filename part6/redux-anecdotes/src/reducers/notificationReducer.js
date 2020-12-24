@@ -1,40 +1,34 @@
+import { NOTIFICATION_HIDE_DEFAULT_TIME } from '../constants'
+
 const initialState = {
   message: '',
-  type: 'successful',
-  timer: 5000
+  type: 'successful'
 };
 
 const notificationReducer = (state = initialState, action) => {
   const { type, data = {} } = action;
   switch (type) {
-  case 'ADD_NOTIFICATION':
-    return { ...state, ...data };
-  case 'REMOVE_NOTIFICATION':
-    return initialState;
-  default: return state;
+    case 'ADD_NOTIFICATION':
+      return { ...state, ...data };
+    case 'REMOVE_NOTIFICATION':
+      return initialState;
+    default: return state;
   }
 };
 
 // action creators
-export const addNotification = (content) => {
-  return {
-    type: 'ADD_NOTIFICATION',
-    data: content
-  };
-};
-
-export const showAndHideNotification = (dispatch, content) => {
-  dispatch(addNotification(content));
-  const timer = content.timer || initialState.timer;
-  setTimeout(() => {
-    dispatch(removeNotification());
-  }, timer);
-};
-
-export const removeNotification = () => {
-  return {
-    type: 'REMOVE_NOTIFICATION',
-  };
-};
+export const setNotification = (data, hideTime = NOTIFICATION_HIDE_DEFAULT_TIME) => {
+  return async (dispatch) => {
+    dispatch({
+      type: 'ADD_NOTIFICATION',
+      data: data
+    })
+    setTimeout(() => {
+      dispatch({
+        type: 'REMOVE_NOTIFICATION',
+      })
+    }, hideTime);
+  }
+}
 
 export default notificationReducer;
