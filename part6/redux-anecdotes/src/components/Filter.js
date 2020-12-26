@@ -1,12 +1,11 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { filterAnecdote } from '../reducers/filterReducer';
 
-const Filter = () => {
-  const { filter } = useSelector(state => state.filter);
-  const dispatch = useDispatch();
+const Filter = ({ filter, filterAnecdote }) => {
+
   const handleChange = (event) => {
-    dispatch(filterAnecdote(event.target.value));
+    filterAnecdote(event.target.value);
   };
   return (
     <div className='form-control'>
@@ -23,4 +22,13 @@ const Filter = () => {
   );
 };
 
-export default Filter;
+const mapStateToProps = ({ filter }) => {
+  return { filter }
+}
+
+const mapDispatchToProps = {
+  filterAnecdote
+}
+
+const connectedFilter = connect(mapStateToProps, mapDispatchToProps)(Filter)
+export default connectedFilter;
