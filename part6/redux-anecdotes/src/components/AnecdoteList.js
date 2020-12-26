@@ -27,12 +27,12 @@ const mapStateToProps = ({ filter, anecdote = [] }) => {
 
   return {
     anecdotes
-  }
-}
+  };
+};
 
 const mapDispatchToProps = {
   updateVote,
-}
+};
 
-const connectedAnecdoteList = connect(mapStateToProps, mapDispatchToProps)(AnecdoteList)
+const connectedAnecdoteList = connect(mapStateToProps, mapDispatchToProps)(AnecdoteList);
 export default connectedAnecdoteList;

@@ -23,12 +23,12 @@ const Filter = ({ filter, filterAnecdote }) => {
 };
 
 const mapStateToProps = ({ filter }) => {
-  return { filter }
-}
+  return { filter };
+};
 
 const mapDispatchToProps = {
   filterAnecdote
-}
+};
 
-const connectedFilter = connect(mapStateToProps, mapDispatchToProps)(Filter)
+const connectedFilter = connect(mapStateToProps, mapDispatchToProps)(Filter);
 export default connectedFilter;

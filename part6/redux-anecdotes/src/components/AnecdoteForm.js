@@ -8,7 +8,7 @@ const AnecdoteForm = ({ addAnecdote }) => {
     event.preventDefault();
     const anecdote = event.target.anecdote.value;
     if (anecdote) {
-      addAnecdote(anecdote)
+      addAnecdote(anecdote);
     }
     event.target.anecdote.value = '';
   };
@@ -37,7 +37,7 @@ const AnecdoteForm = ({ addAnecdote }) => {
 
 const mapDispatchToProps = {
   addAnecdote
-}
+};
 
-const connectedAnecdoteForm = connect(null, mapDispatchToProps)(AnecdoteForm)
+const connectedAnecdoteForm = connect(null, mapDispatchToProps)(AnecdoteForm);
 export default connectedAnecdoteForm;

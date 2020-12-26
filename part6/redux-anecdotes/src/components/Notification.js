@@ -7,7 +7,7 @@ const Notification = ({ message, type }) => {
     message &&
     <div
       className={`${type === 'unsuccessful' ? 'notification--error' : 'notification--success'
-        } notification`}
+      } notification`}
     >
       {message}
     </div>
@@ -19,8 +19,8 @@ const mapStateToProps = ({ notification }) => {
   return {
     message,
     type
-  }
-}
+  };
+};
 
-const connectedNotification = connect(mapStateToProps)(Notification)
+const connectedNotification = connect(mapStateToProps)(Notification);
 export default connectedNotification;
