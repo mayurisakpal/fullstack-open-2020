@@ -1,19 +1,26 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import '../styles/notification.css';
 
-const Notification = () => {
-  const { message, type } = useSelector(state => state.notification);
-
+const Notification = ({ message, type }) => {
   return (
     message &&
     <div
       className={`${type === 'unsuccessful' ? 'notification--error' : 'notification--success'
-      } notification`}
+        } notification`}
     >
       {message}
     </div>
   );
 };
 
-export default Notification;
+const mapStateToProps = ({ notification }) => {
+  const { message, type } = notification;
+  return {
+    message,
+    type
+  }
+}
+
+const connectedNotification = connect(mapStateToProps)(Notification)
+export default connectedNotification;
