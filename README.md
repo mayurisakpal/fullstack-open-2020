@@ -14,3 +14,4 @@ This is a course on modern web development by the University of Helsinki. This c
 - [x] Part 3: Programming a server with NodeJS and Express 22/22
 - [x] Part 4: Testing Express servers, user administration 22/22
 - [x] Part 5: Testing React apps 22/22
+- [x] Part 6: State management with Redux 21/21

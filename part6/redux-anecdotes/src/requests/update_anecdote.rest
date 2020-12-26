@@ -1,0 +1,8 @@
+PUT http://localhost:3001/anecdotes/36975
+content-type: application/json
+
+{
+    "content": "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
+    "id": "36975",
+    "votes": 2
+}
